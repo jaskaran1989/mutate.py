@@ -167,11 +167,11 @@ def main (input_file, output_file = False ) :
 	random_line = random.randint(0,number_of_lines_of_code)
 
 	# shuffle mutant operators
-	mutant_operators = mutation_trick.keys()
+	mutant_operators = list(mutation_trick.keys())
 	random.shuffle(mutant_operators)
 
 	mutated_line = "" 
-	for i in range(random_line,number_of_lines_of_code) + range(0,random_line) :
+	for i in list(range(random_line,number_of_lines_of_code)) + list(range(0,random_line)) :
 	#
 		# do not mutate preprocessor or assert statements
 		if source_code[i].strip().startswith("#") or source_code[i].strip().startswith("assert") :
@@ -190,7 +190,7 @@ def main (input_file, output_file = False ) :
 				# then : choose any one randomly
 
 				random_substring = random.randint(1,number_of_substrings_found)
-				for r in xrange(1,random_substring+1) :
+				for r in list(xrange(1,random_substring+1)) :
 				#
 					if mutate_at_index == 0 :
 						mutate_at_index = source_code[i].index(m)
@@ -229,7 +229,7 @@ def write_to_file ( mutant_file_name, source_code, mutated_line_number, mutated_
 #
 	output_file = open(mutant_file_name, "w")
 
-	for i in xrange(0,len(source_code)) :
+	for i in list(xrange(0,len(source_code))) :
 		if i == mutated_line_number : 
 			output_file.write("/* XXX: original code was : "+source_code[i]+" */\n")
 			output_file.write(mutated_line+"\n")
